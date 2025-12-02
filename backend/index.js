@@ -1,8 +1,10 @@
 import express from "express";
 import mysql from "mysql2";
+import cors from "cors";
 const app = express();
 const port = 5500;
 
+app.use(cors());
 // Middleware to parse JSON requests
 app.use(express.json());
 
@@ -28,7 +30,7 @@ app.get('/', (req, res) => {
 
 // Define a GET route to fetch data from MySQL
 app.get('/data', (req, res) => {
-  const query = 'SELECT * FROM Day_Type'; // replace with your table name
+  const query = 'SELECT DAY_TYPE FROM Day_Type'; // replace with your table name
   connection.query(query, (err, results) => {
     if (err) {
       res.status(500).send(err);

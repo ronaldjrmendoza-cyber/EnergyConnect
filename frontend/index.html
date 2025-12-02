@@ -44,8 +44,15 @@
         </div>
 
         <div class="listen">
-            <h4>LISTEN LIVE HERE 🎧</h4>
-            <p>On Air: Troye Sivan – Youth</p>
+            <button id="liveBtn" class="listen-button">
+                <div class="listen-title">LISTEN LIVE HERE <img src = "images/listen_live.png"></div>
+                <div class="listen-subtitle">On Air: Troye Sivan – Youth</div>
+            </button>
+
+            <!-- Hidden audio tag -->
+            <audio id="liveAudio">
+                <source src="https://stream.zeno.fm/klewk28qlqquv.m3u" type="audio/mpeg">
+            </audio>
         </div>
     </div>
 
@@ -84,7 +91,36 @@
             <div>By: Keith Clores</div>
         </div>
     </div>
+    <script>
+        const audio = document.getElementById("liveAudio");
+        const btn = document.getElementById("liveBtn");
+        const title = btn.querySelector(".listen-title");
 
+        let isPlaying = false;
+
+        function setPlayState() {
+            title.innerHTML = `▶ LISTEN LIVE HERE <img src="images/listen_live.png">`;
+        }
+
+        function setPauseState() {
+            title.innerHTML = `⏸ PAUSE LIVE STREAM <img src="images/listen_live.png">`;
+        }
+
+        btn.addEventListener("click", () => {
+            if (!isPlaying) {
+                audio.play();
+                isPlaying = true;
+                setPauseState();
+            } else {
+                audio.pause();
+                isPlaying = false;
+                setPlayState();
+            }
+        });
+
+        // default on load
+        setPlayState();
+    </script>
 </body>
 
     <div class = "footer">

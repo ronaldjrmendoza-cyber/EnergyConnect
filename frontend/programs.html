@@ -67,5 +67,33 @@
         <footer>Privacy Policy | Energy FM © 2010</footer>
     </div>
 
+    <script>
+  fetch('http://localhost:5500/data')
+    .then(response => response.json())
+    .then(data => {
+      const programList = document.querySelector('.program-list');
+      programList.innerHTML = ''; // clear existing content
+
+      data.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('program-card');
+        card.innerHTML = `
+          <div class="card-left">
+            <div class="title-status">
+              <h3>PROGRAM NAME</h3>
+              <span class="status offline">OFFLINE</span>
+            </div>
+            <p class="schedule">TIME | ${item.DAY_TYPE}</p>
+            <p class="hosts">HOSTS</p>
+          </div>
+          <div class="card-right">
+            <p>Program description here</p>
+          </div>
+        `;
+        programList.appendChild(card);
+      });
+    })
+    .catch(err => console.error(err));
+</script>
 </body>
 </html>
